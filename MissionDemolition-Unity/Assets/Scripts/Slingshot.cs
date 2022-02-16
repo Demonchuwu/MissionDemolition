@@ -4,7 +4,7 @@
  * 
  * 
  * Last Edited by: Cristian Misla
- * Last Edited: 2/9/2022
+ * Last Edited: 2/15/2022
  * Description: Control for Sling Shot
  ***/
 
@@ -66,6 +66,7 @@ public class Slingshot : MonoBehaviour
             aimingMode = false;
             projectileRB.isKinematic = false;
             projectileRB.velocity = -mouseDelta * velocityMultipler;
+            FollowCam.POI = projectile;
             projectile = null; //forget the last instance
         }
 
