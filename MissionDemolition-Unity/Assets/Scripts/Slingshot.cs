@@ -4,7 +4,7 @@
  * 
  * 
  * Last Edited by: Cristian Misla
- * Last Edited: 2/15/2022
+ * Last Edited: 2/19/2022
  * Description: Control for Sling Shot
  ***/
 
@@ -18,6 +18,7 @@ public class Slingshot : MonoBehaviour
     [Header("Set in Inspector")]
     public GameObject prefabProjectile;
     public float velocityMultipler = 8f;
+    static private Slingshot S;
 
     [Header("Set Dynamically")]
     public GameObject launchPoint;
@@ -26,7 +27,14 @@ public class Slingshot : MonoBehaviour
     public bool aimingMode; //Is player aiming or not
     public Rigidbody projectileRB; //Rigidbody of Projectile
 
-
+    static public Vector3 LAUNCH_POS
+    {                                        // b
+        get
+        {
+            if (S == null) return Vector3.zero;
+            return S.launchPos;
+        }
+    }
 
     private void Awake()
     {
@@ -68,6 +76,8 @@ public class Slingshot : MonoBehaviour
             projectileRB.velocity = -mouseDelta * velocityMultipler;
             FollowCam.POI = projectile;
             projectile = null; //forget the last instance
+            MissionDemolition.ShotFired();
+            ProjectileLine.S.poi = projectile;
         }
 
     }//end Update()
